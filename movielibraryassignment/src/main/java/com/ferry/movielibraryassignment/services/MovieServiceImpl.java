@@ -20,7 +20,7 @@ import java.util.List;
 public class MovieServiceImpl implements MovieService {
 
     @Override
-    public Movie create(Movie movie) {
+    public Movie createMovie(Movie movie) {
 
         JSONParser parser = new JSONParser();
         try {
@@ -34,18 +34,12 @@ public class MovieServiceImpl implements MovieService {
 
             jsonArray.add(newMovie);
 
-            try (FileWriter file = new FileWriter(ResourceUtils.getFile("classpath:dataSource/movies.json").getAbsolutePath())) {
-
-                System.out.println("Start to write in file");
-                file.write(jsonArray.toJSONString());
-                file.close();
-                System.out.println("Successfully Copied JSON Object to File...");
-                System.out.println("\nJSON Object: " + jsonArray);
-
-            }catch (Exception ex){
-                ex.printStackTrace();
-            }
-
+            System.out.println("Start to write in file");
+            FileWriter file = new FileWriter(ResourceUtils.getFile("classpath:dataSource/movies.json").getAbsolutePath());
+            file.write(jsonArray.toJSONString());
+            file.flush();
+            file.close();
+            System.out.println("Successfully Copied JSON Object to File...");
 
         }catch (Exception ex){
             ex.printStackTrace();
@@ -55,12 +49,37 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie delete(int id) {
-        return null;
+    public Movie deleteMovie(int movieId) {
+
+        JSONParser parser = new JSONParser();
+        Movie movieDeleted = new Movie();
+        try{
+
+            JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(ResourceUtils.getFile("classpath:dataSource/movies.json").getAbsolutePath()));
+            JSONObject jsonObject = (JSONObject)jsonArray.get(movieId);
+            jsonArray.remove(movieId);
+
+            System.out.println("Start to Remove in file");
+            FileWriter file = new FileWriter(ResourceUtils.getFile("classpath:dataSource/movies.json").getAbsolutePath());
+            file.write(jsonArray.toJSONString());
+            file.flush();
+            file.close();
+            System.out.println("Successfully Removed JSON Object to File...");
+
+            if (jsonObject != null){
+                movieDeleted.setTitle((String) jsonObject.get("title"));
+                movieDeleted.setDirector((String) jsonObject.get("director"));
+                movieDeleted.setReleaseDate((String) jsonObject.get("releaseDate"));
+                movieDeleted.setType((String) jsonObject.get("type"));
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return movieDeleted;
     }
 
     @Override
-    public List<Movie> findAll() {
+    public List<Movie> findAllMovies() {
         JSONParser parser = new JSONParser();
         try {
             JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(ResourceUtils.getFile("classpath:dataSource/movies.json").getAbsolutePath()));
@@ -78,6 +97,7 @@ public class MovieServiceImpl implements MovieService {
                 movieList.add(movie);
             }
             return movieList;
+
         }catch (Exception ex){
             ex.printStackTrace();
         }
@@ -85,12 +105,52 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie findById(int id) {
-        return null;
+    public Movie findMovieById(int movieId) {
+
+        JSONParser parser = new JSONParser();
+        Movie movie = new Movie();
+        try {
+            JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(ResourceUtils.getFile("classpath:dataSource/movies.json").getAbsolutePath()));
+            JSONObject jsonObject = (JSONObject)jsonArray.get(movieId);
+
+            if (jsonObject != null){
+                movie.setTitle((String) jsonObject.get("title"));
+                movie.setDirector((String) jsonObject.get("director"));
+                movie.setReleaseDate((String) jsonObject.get("releaseDate"));
+                movie.setType((String) jsonObject.get("type"));
+            }
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return movie;
     }
 
     @Override
-    public Movie update(Movie movie) {
-        return null;
+    public Movie updateMovie(int movieId, Movie movie) {
+
+        JSONParser parser = new JSONParser();
+        try{
+
+            if (movie != null){
+                JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(ResourceUtils.getFile("classpath:dataSource/movies.json").getAbsolutePath()));
+                JSONObject jsonObject = (JSONObject)jsonArray.get(movieId);
+
+                jsonObject.replace("title", movie.getTitle());
+                jsonObject.replace("director", movie.getDirector());
+                jsonObject.replace("releaseDate", movie.getReleaseDate());
+                jsonObject.replace("type", movie.getType());
+
+                System.out.println("Start to update in file");
+                FileWriter file = new FileWriter(ResourceUtils.getFile("classpath:dataSource/movies.json").getAbsolutePath());
+                file.write(jsonArray.toJSONString());
+                file.flush();
+                file.close();
+                System.out.println("Successfully Updated JSON Object to File...");
+            }
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+        }
+        return movie;
     }
 }
