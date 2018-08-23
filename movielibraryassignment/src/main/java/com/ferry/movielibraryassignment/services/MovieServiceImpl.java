@@ -38,9 +38,10 @@ public class MovieServiceImpl implements MovieService {
 
                 System.out.println("Start to write in file");
                 file.write(jsonArray.toJSONString());
+                file.close();
                 System.out.println("Successfully Copied JSON Object to File...");
                 System.out.println("\nJSON Object: " + jsonArray);
-                
+
             }catch (Exception ex){
                 ex.printStackTrace();
             }
