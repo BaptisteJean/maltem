@@ -1,0 +1,24 @@
+<div class="col-md-6">
+  <h2> Movies Details</h2>
+
+  <table class="table table-striped">
+    <thead>
+        <tr>
+          <th class="hidden">No</th>
+          <th>Title</th>
+          <th>Director</th>
+          <th>Realise Date</th>
+          <th>Type</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let movie of movies">
+          <td class="hidden"></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><button class="btn btn-danger" (click)="deleteMovie(user)"> Delete Movie</button></td>
+        </tr>
+    </tbody>
+  </table>
+</div>
