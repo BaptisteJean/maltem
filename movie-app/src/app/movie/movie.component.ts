@@ -22,10 +22,12 @@ export class MovieComponent implements OnInit {
       });
   }
 
-  deleteMovie(movie: Movie): void {
-    this.movieService.deleteMovie(movie)
+  deleteMovie(id: number): void {
+    console.log(id);
+    this.movieService.deleteMovie(id)
       .subscribe( data => {
-        this.movies = this.movies.filter(u => u !== movie);
+        this.ngOnInit();
+
       })
   }
 

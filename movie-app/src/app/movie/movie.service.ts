@@ -19,12 +19,20 @@ export class MovieService {
     return this.http.get<Movie[]>(this.userUrl+"allMovies");
   }
 
-  public deleteMovie(movie) {
-    return this.http.delete(this.userUrl + "/"+ movie.id);
+  public deleteMovie(movieId) {
+    return this.http.delete(this.userUrl + "deleteMovie/"+ movieId);
   }
 
-  //public createMovie(movie) {
-  //  return this.http.post<Movie>(this.userUrl, movie);
-  //}
+  public createMovie(movie) {
+    return this.http.post<Movie>(this.userUrl+"addMovie", movie);
+  }
+
+  public getMovieById(movieId){
+    return this.http.get<Movie>(this.userUrl+"findMovieById/"+movieId);
+  }
+
+  public updateMovie(movieId, movie){
+    return this.http.put<Movie>(this.userUrl+"updateMovie/"+movieId,movie);
+  }
 
 }

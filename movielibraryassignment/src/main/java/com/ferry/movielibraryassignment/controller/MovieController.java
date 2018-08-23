@@ -14,6 +14,8 @@ import java.util.List;
 /**
  * Created by ferry on 23/08/18.
  */
+
+@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
 @RestController
 @RequestMapping("/api")
 public class MovieController {

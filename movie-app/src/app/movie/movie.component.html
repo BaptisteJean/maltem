@@ -1,7 +1,7 @@
 <div class="col-md-6">
   <h2> Movies Details</h2>
 
-  <table class="table table-striped">
+  <table class="table table-striped ">
     <thead>
         <tr>
           <th class="hidden">No</th>
@@ -12,12 +12,14 @@
         </tr>
     </thead>
     <tbody>
-        <tr *ngFor="let movie of movies">
-          <td class="hidden"></td>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><button class="btn btn-danger" (click)="deleteMovie(user)"> Delete Movie</button></td>
+        <tr *ngFor="let movie of movies; let i=index">
+          <td class="hidden">{{i}}</td>
+          <td>{{movie.title}}</td>
+          <td>{{movie.director}}</td>
+          <td>{{movie.releaseDate}}</td>
+          <td>{{movie.type}}</td>
+          <td><button class="btn btn-danger" (click)="deleteMovie(i)"> Delete</button></td>
+          <td><a routerLink="/update/{{i}}"> Update </a></td>
         </tr>
     </tbody>
   </table>
