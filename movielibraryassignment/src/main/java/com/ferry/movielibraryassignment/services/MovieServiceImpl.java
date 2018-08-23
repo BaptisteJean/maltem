@@ -23,22 +23,28 @@ public class MovieServiceImpl implements MovieService {
     public Movie create(Movie movie) {
 
         JSONParser parser = new JSONParser();
-        try (FileWriter file = new FileWriter(ResourceUtils.getFile("classpath:dataSource/movies.json").getAbsolutePath())){
+        try {
             JSONArray jsonArray = (JSONArray) parser.parse(new FileReader(ResourceUtils.getFile("classpath:dataSource/movies.json").getAbsolutePath()));
 
             JSONObject newMovie = new JSONObject();
-            newMovie.put("title", "crunchify.com");
-            newMovie.put("director", "App Shah");
-            newMovie.put("releaseDate", "App Shah");
-            newMovie.put("type", "App Shah");
+            newMovie.put("title", movie.getTitle());
+            newMovie.put("director", movie.getDirector());
+            newMovie.put("releaseDate", movie.getReleaseDate());
+            newMovie.put("type", movie.getType());
 
             jsonArray.add(newMovie);
 
-            System.out.println("Start to write in file");
+            try (FileWriter file = new FileWriter(ResourceUtils.getFile("classpath:dataSource/movies.json").getAbsolutePath())) {
 
-            file.write(jsonArray.toJSONString());
-            System.out.println("Successfully Copied JSON Object to File...");
-            System.out.println("\nJSON Object: " + jsonArray);
+                System.out.println("Start to write in file");
+                file.write(jsonArray.toJSONString());
+                System.out.println("Successfully Copied JSON Object to File...");
+                System.out.println("\nJSON Object: " + jsonArray);
+                
+            }catch (Exception ex){
+                ex.printStackTrace();
+            }
+
 
         }catch (Exception ex){
             ex.printStackTrace();
