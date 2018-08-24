@@ -12,6 +12,12 @@
   <br/>
 
   <div class="row">
+      <div class="form-group col-md-12">
+        <input [(ngModel)]="searchText" placeholder="search movie goes here">
+      </div>
+  </div>
+
+  <div class="row">
     <div class="table-responsive">
       <table class="table table-striped">
         <thead>
@@ -22,10 +28,11 @@
           <th>Realise Date</th>
           <th>Type</th>
           <th></th>
+          <th></th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let movie of movies; let i=index">
+        <tr *ngFor="let movie of movies  | filter : searchText; let i=index">
           <td class="hidden">{{i}}</td>
           <td>{{movie.title}}</td>
           <td>{{movie.director}}</td>
@@ -33,7 +40,8 @@
           <td>{{movie.type}}</td>
           <td>
             <button class="btn btn-danger" (click)="deleteMovie(i)"> Delete</button>
-            <br/>
+          </td>
+          <td>
             <button class="btn btn-info" routerLink="/update/{{i}}"> Update </button>
           </td>
         </tr>
