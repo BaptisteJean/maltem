@@ -11,3 +11,6 @@ HOW TO compile/build/run it
     - go to the movie-app folder "cd movie-app" do "ng serve --open" or "ng serve",
     - open an internet browser and enter the link http: // localhost: 4200
 
+    
+Version 8.x of node js is required to not have bugrs
+
