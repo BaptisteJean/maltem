@@ -12,6 +12,7 @@ import {MovieService} from './movie/movie.service';
 import {HttpClientModule} from "@angular/common/http";
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -19,14 +20,15 @@ import { HomePageComponent } from './home-page/home-page.component';
     MovieComponent,
     AddMovieComponent,
     NavBarComponent,
-    HomePageComponent
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    Ng2SearchPipeModule
+    Ng2SearchPipeModule,
+    BrowserAnimationsModule
   ],
   providers: [MovieService],
   bootstrap: [AppComponent]

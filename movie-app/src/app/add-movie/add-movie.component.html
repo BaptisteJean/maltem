@@ -4,22 +4,27 @@
   <form>
     <div class="form-group">
       <label for="title">Title:</label>
-      <input [(ngModel)]="movie.title" placeholder="Title" name="Title" class="form-control" id="title">
+      <input [(ngModel)]="movie.title" required="required" placeholder="Title" name="Title" class="form-control" id="title">
+      <span *ngIf="isTitle" style="color: red">complete the title of movie</span>
     </div>
+
 
     <div class="form-group">
       <label for="director">Director:</label>
-      <input [(ngModel)]="movie.director" placeholder="Director" name="director" class="form-control" id="director">
+      <input [(ngModel)]="movie.director" required="required" placeholder="Director" name="director" class="form-control" id="director">
+      <span *ngIf="isDirector" style="color: red">complete the name of Director</span>
     </div>
 
     <div class="form-group">
       <label for="realiseDate">Release Date:</label>
-      <input [(ngModel)]="movie.releaseDate" placeholder="Realise Date jj/mm/aaaa" name="realiseDate" class="form-control" id="realiseDate">
+      <input type="date" [(ngModel)]="movie.releaseDate" id="date" required="required" dateformat="DD/MM/YYYY" name="realiseDate" class="form-control" id="realiseDate">
+      <span *ngIf="isreleaseDate" style="color: red">complete the date to movie release</span>
     </div>
 
     <div class="form-group">
       <label for="type">Type :</label>
-      <input [(ngModel)]="movie.type" placeholder="Type" name="type" class="form-control" id="type">
+      <input [(ngModel)]="movie.type" required="required" placeholder="Type" name="type" class="form-control" id="type">
+      <span *ngIf="isTypes" style="color: red">complete the type of movie</span>
     </div>
 
     <button *ngIf="!id" class="btn btn-success" (click)="createMovie(movie)">Create</button>

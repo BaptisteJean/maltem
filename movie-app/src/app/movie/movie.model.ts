@@ -1,7 +1,7 @@
 export class Movie {
 
-  title: string;
-  director: string;
-  releaseDate: string;
-  type: string;
+  title: string = null;
+  director: string  = null;
+  releaseDate: string  = null;
+  type: string  = null;
 }

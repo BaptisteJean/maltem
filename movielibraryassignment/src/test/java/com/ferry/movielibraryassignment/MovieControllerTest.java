@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 /**
- * Created by wabo on 24/08/18.
+ * Created by ferry on 24/08/18.
  */
 @RunWith(SpringRunner.class)
 @WebMvcTest(value = MovieController.class, secure = false)
@@ -30,23 +30,16 @@ public class MovieControllerTest {
     @MockBean
     private MovieService movieService;
 
-//    Course mockCourse = new Course("Course1", "Spring", "10 Steps",
-//            Arrays.asList("Learn Maven", "Import Project", "First Example",
-//                    "Second Example"));
     Movie mockMovie = new Movie("Oceans 8", "Gary Ross", "13/06/2018", "action");
 
-//    String exampleCourseJson = "{\"name\":\"Spring\",\"description\":\"10 Steps\",\"steps\":[\"Learn Maven\",\"Import Project\",\"First Example\",\"Second Example\"]}";
     String exampleMovieJson = "{\"title\":\"Oceans 8\",\"director\":\"Gary Ross\",\"releaseDate\":\"13/06/2018\",\"type\":\"action\"}";
 
     @Test
-    public void retrieveDetailsForCourse() throws Exception {
+    public void deleteMoviebyId() throws Exception {
 
         Mockito.when(
                 movieService.deleteMovie(Mockito.anyInt())).thenReturn(mockMovie);
 
-//        RequestBuilder requestBuilder = MockMvcRequestBuilders.delete(
-//                "/students/Student1/courses/Course1").accept(
-//                MediaType.APPLICATION_JSON);
         RequestBuilder requestBuilder = MockMvcRequestBuilders.delete(
                 "/api/deleteMovie/0").accept(
                 MediaType.APPLICATION_JSON);
@@ -55,8 +48,6 @@ public class MovieControllerTest {
 
         System.out.println(result.getResponse());
         String expected = "{title:Oceans 8,director:Gary Ross,releaseDate:13/06/2018,type:action}";
-
-        // {"id":"Course1","name":"Spring","description":"10 Steps, 25 Examples and 10K Students","steps":["Learn Maven","Import Project","First Example","Second Example"]}
 
         JSONAssert.assertEquals(expected, result.getResponse()
                 .getContentAsString(), false);

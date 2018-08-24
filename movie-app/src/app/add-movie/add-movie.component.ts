@@ -13,6 +13,11 @@ export class AddMovieComponent implements OnInit {
 
   movie: Movie = new Movie();
   id: number;
+  newmn: string;
+  isTitle= false;
+  isDirector = false;
+  isreleaseDate = false;
+  isTypes = false;
 
   constructor(
     private router: Router,
@@ -25,10 +30,35 @@ export class AddMovieComponent implements OnInit {
   }
 
   createMovie(movie: Movie): void {
-    this.movieSevice.createMovie(movie)
-      .subscribe( data => {
-        alert("movie created successfully.");
-      });
+
+    if(movie.title == null || movie.title.length == 0){
+      this.isTitle = true;
+    } else this.isTitle = false;
+    if(movie.director  == null || movie.director.length == 0){
+      this.isDirector = true;
+    } else this.isDirector = false;
+    if(movie.releaseDate  == null || movie.releaseDate.length == 0){
+      this.isreleaseDate = true;
+    } else this.isreleaseDate = false;
+    if(movie.type  == null || movie.type.length == 0){
+      this.isTypes = true;
+    } else this.isTypes = false;
+
+    if(!this.isTitle && !this.isDirector && !this.isreleaseDate && !this.isTypes){
+      var d = new Date(movie.releaseDate);
+      var dt = d.getDate() < 10 ? "0"+d.getDate() : d.getDate();
+      var mn = d.getMonth();
+      mn++;
+      this.newmn = mn < 10 ? "0"+mn.toString() : mn.toString();
+      var yy = d.getFullYear();
+      var dateC = dt+"/"+this.newmn+"/"+yy;
+      movie.releaseDate = dateC;
+      this.movieSevice.createMovie(movie)
+        .subscribe( data => {
+          this.movie = new Movie();
+          alert("movie created successfully.");
+        });
+    }
 
   }
 
@@ -37,7 +67,6 @@ export class AddMovieComponent implements OnInit {
       this.id = params['id'];
         console.log(this.id);
       if(this.id){
-        console.log("toto");
         this.movieSevice.getMovieById(this.id)
           .subscribe( data => {
             this.movie = data;
@@ -48,10 +77,33 @@ export class AddMovieComponent implements OnInit {
   }
 
   updateMovie(id, movie): void{
+    if(movie.title == null || movie.title.length == 0){
+      this.isTitle = true;
+    } else this.isTitle = false;
+    if(movie.director  == null || movie.director.length == 0){
+      this.isDirector = true;
+    } else this.isDirector = false;
+    if(movie.releaseDate  == null || movie.releaseDate.length == 0){
+      this.isreleaseDate = true;
+    } else this.isreleaseDate = false;
+    if(movie.type  == null || movie.type.length == 0){
+      this.isTypes = true;
+    } else this.isTypes = false;
+
+    if(!this.isTitle && !this.isDirector && !this.isreleaseDate && !this.isTypes){
+      var d = new Date(movie.releaseDate);
+      var dt = d.getDate() < 10 ? "0"+d.getDate() : d.getDate();
+      var mn = d.getMonth();
+      mn++;
+      this.newmn = mn < 10 ? "0"+mn.toString() : mn.toString();
+      var yy = d.getFullYear();
+      var dateC = dt+"/"+this.newmn+"/"+yy;
+      movie.releaseDate = dateC;
       this.movieSevice.updateMovie(id, movie)
         .subscribe( data => {
           alert("movie updated successfully.");
         });
+    }
 
     }
 
