@@ -1,9 +1,6 @@
-<p>
-  add-movie works!
-</p>
-
-<div class="col-md-6">
-  <h2 class="text-center">Add Movie</h2>
+<div class="col-md-12">
+  <h2 *ngIf="!id" class="text-center">Add Movie</h2>
+  <h2 *ngIf="id" class="text-center">Update Movie</h2>
   <form>
     <div class="form-group">
       <label for="title">Title:</label>

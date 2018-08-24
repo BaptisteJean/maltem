@@ -8,12 +8,16 @@ import { AppRoutingModule } from './/app-routing.module';
 import { AddMovieComponent } from './add-movie/add-movie.component';
 import {MovieService} from './movie/movie.service';
 import {HttpClientModule} from "@angular/common/http";
+import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { HomePageComponent } from './home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MovieComponent,
-    AddMovieComponent
+    AddMovieComponent,
+    NavBarComponent,
+    HomePageComponent
   ],
   imports: [
     BrowserModule,
