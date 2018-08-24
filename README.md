@@ -5,7 +5,7 @@ Movie Library Assignment is a movie management application. The goal of this pro
 
 In this application we will be able to use some crud methods such as:
  - the creation of a movie,
- - the removal of a film,
+ - the removal of a movie,
  - updating a movie
  - list all the movies
  - filter movies according to a research element
