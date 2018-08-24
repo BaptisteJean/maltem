@@ -2,6 +2,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import { AppComponent } from './app.component';
 import { MovieComponent } from './movie/movie.component';
 import { AppRoutingModule } from './/app-routing.module';
@@ -23,7 +25,8 @@ import { HomePageComponent } from './home-page/home-page.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    Ng2SearchPipeModule
   ],
   providers: [MovieService],
   bootstrap: [AppComponent]
