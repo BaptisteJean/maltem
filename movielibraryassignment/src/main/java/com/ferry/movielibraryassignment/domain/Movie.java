@@ -10,6 +10,16 @@ public class Movie {
     private String releaseDate;
     private String type;
 
+    public Movie() {
+    }
+
+    public Movie(String title, String director, String releaseDate, String type) {
+        this.title = title;
+        this.director = director;
+        this.releaseDate = releaseDate;
+        this.type = type;
+    }
+
     public String getTitle() {
         return title;
     }
