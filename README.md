@@ -20,6 +20,7 @@ The project is subdivided into two folders:
 HOW TO compile/build/run it
 
     - you must first clone the github repository in a folder of your machine,
+    - cd to maltem,
     - then go to the folder movielibraryassignment "cd movielibraryassignment",
     - then execute the command "mvn spring-boot: run",
     - then go back to the main directory,
