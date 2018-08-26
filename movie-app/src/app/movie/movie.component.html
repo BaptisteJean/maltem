@@ -18,35 +18,21 @@
   </div>
 
   <div class="row">
-    <div class="table-responsive">
-      <table class="table table-striped">
-        <thead>
-        <tr>
-          <th class="hidden">No</th>
-          <th>Title</th>
-          <th>Director</th>
-          <th>Realise Date</th>
-          <th>Type</th>
-          <th></th>
-          <th></th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let movie of movies  | filter : searchText; let i=index">
-          <td class="hidden">{{i}}</td>
-          <td>{{movie.title}}</td>
-          <td>{{movie.director}}</td>
-          <td>{{movie.releaseDate}}</td>
-          <td>{{movie.type}}</td>
-          <td>
-            <button class="btn btn-danger" (click)="deleteMovie(i)"> Delete</button>
-          </td>
-          <td>
-            <button class="btn btn-info" routerLink="/update/{{i}}"> Update </button>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+    <div class="card col-lg-4 col-md-6 col-xs-12 col-sm-12" style="width: 15rem; margin-bottom: 5px;"
+         *ngFor="let movie of movies  | filter : searchText; let i=index">
+      <img class="card-img-top"
+           src="https://s3-eu-west-1.amazonaws.com/lecturequizuploads/f0cb8760-5992-4566-bec6-34f2698b3fa4"
+           alt="" style="width: auto; height: 12rem; margin-left: 1rem">
+      <div class="card-body">
+        <h5 class="card-title" style="text-align: center">{{movie.title}}</h5>
+        <p class="card-text">
+          <b>Director :</b> {{movie.director}} <br/>
+          <b>Realise Date :</b>{{movie.releaseDate}} <br/>
+          <b>Type : </b>{{movie.type}}
+        </p>
+        <button class="btn btn-danger" (click)="deleteMovie(i)"> Delete</button>
+        <button style="margin-left: 45%" class="btn btn-info" routerLink="/update/{{i}}"> Update </button>
+      </div>
     </div>
   </div>
 </div>
